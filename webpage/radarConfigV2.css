@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+section {
+    display: grid;
+    width: fit-content;
+}
+label {
+    grid-column-start: 1;
+}
+input {
+    grid-column-start: 2;
+}
+h3 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+span {
+    display: inline;
+    grid-column-start: 3;
+}
+#saveConfig {
+    position: sticky;
+    top: 1rem;
+    right: 1rem;
+    left: 50rem;
+}
+#radarConfigPage {
+    margin: 1rem;
+}
