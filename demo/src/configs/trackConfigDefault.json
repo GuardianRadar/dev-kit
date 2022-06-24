@@ -1,0 +1,12 @@
+{
+    "clustering": {
+        "associateDistance": 5
+    },
+    "tracking": {
+        "associateDistance": 5,
+        "maxAge": 20,
+        "maxCount": 10,
+        "clusterWeight": 0.5,
+        "minimumTicks": 10
+    }
+}

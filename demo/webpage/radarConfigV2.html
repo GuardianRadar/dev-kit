@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="referrer" content="no-referrer">
+    <title>Radar Setup</title>
+
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <div id="radarConfigPage">
+        <button id="saveConfig">save</button>
+
+        <section>
+            <label id="label-FlushCfg">FlushCfg:</label>
+            <input id="input-FlushCfg" type="checkbox">
+            <br>
+            <label id="label-ResolutionInfo">ResolutionInfo:</label>
+            <input id="input-ResolutionInfo" type="checkbox">
+            <br>
+        </section>
+        <section>
+        </section>
+        <section>
+            <h3>DfeDataOutputMode</h3>
+            <label id="label-DfeDataOutputMode-ModeType">ModeType:</label>
+            <select id="input-DfeDataOutputMode-ModeType">
+                <option value="1">Frame Based Chirps (1)</option>
+                <option value="2" disabled>Continuous Chirping (2)</option>
+                <option value="3">Advanced Frame Config (3)</option>
+            </select>
+            <br>
+        </section>
+        <section>
+            <h3>ChannelCfg</h3>
+            <label id="label-ChannelCfg-RxChannelEn">RxChannelEn:</label>
+            <select id="input-ChannelCfg-RxChannelEn">
+                <option value="0">0x0000 (0)</option>
+                <option value="1">0x0001 (1)</option>
+                <option value="2">0x0010 (2)</option>
+                <option value="3">0x0011 (3)</option>
+                <option value="4">0x0100 (4)</option>
+                <option value="5">0x0101 (5)</option>
+                <option value="6">0x0110 (6)</option>
+                <option value="7">0x0111 (7)</option>
+                <option value="8">0x1000 (8)</option>
+                <option value="9">0x1001 (9)</option>
+                <option value="10">0x1010 (10)</option>
+                <option value="11">0x1011 (11)</option>
+                <option value="12">0x1100 (12)</option>
+                <option value="13">0x1101 (13)</option>
+                <option value="14">0x1110 (14)</option>
+                <option value="15">0x1111 (15)</option>
+            </select>
+            <br>
+            <label id="label-ChannelCfg-TxChannelEn">TxChannelEn:</label>
+            <select id="input-ChannelCfg-TxChannelEn">
+                <option value="0">0x00 (0)</option>
+                <option value="1">0x01 (1)</option>
+                <option value="2">0x10 (2)</option>
+                <option value="3">0x11 (3)</option>
+            </select>
+            <br>
+            <label id="label-ChannelCfg-Cascading">Cascading:</label>
+            <input id="input-ChannelCfg-Cascading" type="number" disabled>
+            <br>
+        </section>
+        <section>
+            <h3>AdcCfg</h3>
+            <label id="label-AdcCfg-NumADCBits">NumADCBits:</label>
+            <input id="input-AdcCfg-NumADCBits" type="number" disabled>
+            <br>
+            <label id="label-AdcCfg-AdcOutputFmt">AdcOutputFmt:</label>
+            <select id="input-AdcCfg-AdcOutputFmt">
+                <option value="0" disabled>real (0)</option>
+                <option value="1">complex 1x -image band filtered output (1)</option>
+                <option value="2">complex 2x -image band visible (2)</option>
+            </select>
+            <br>
+        </section>
+        <section>
+            <h3>AdcBufCfg</h3>
+            <label id="label-AdcBufCfg-SubFrameIdx">SubFrameIdx:</label>
+            <input id="input-AdcBufCfg-SubFrameIdx" type="number">
+            <br>
+            <label id="label-AdcBufCfg-AdcOutputFmt">AdcOutputFmt:</label>
+            <select id="input-AdcBufCfg-AdcOutputFmt" disabled>
+                <option value="0">complex (0)</option>
+                <option value="1" disabled>real (1)</option>
+            </select>
+            <br>
+            <label id="label-AdcBufCfg-SampleSwap">SampleSwap:</label>
+            <select id="input-AdcBufCfg-SampleSwap" disabled>
+                <option value="0">I in LSB, Q in MSB (0)</option>
+                <option value="1" disabled>Q in LSB, I in MSB (1)</option>
+            </select>
+            <br>
+            <label id="label-AdcBufCfg-ChanInterLeave">ChanInterLeave:</label>
+            <select id="input-AdcBufCfg-ChanInterLeave" disabled>
+                <option value="0" disabled>Interleaved (0)</option>
+                <option value="1">Non-Interleaved (1)</option>
+            </select>
+            <br>
+            <label id="label-AdcBufCfg-ChirpThreshold">ChirpThreshold:</label>
+            <select id="input-AdcBufCfg-ChirpThreshold">
+                <option value="0">Determine chirp threshold automatically (0)</option>
+                <option value="1">1 (1)</option>
+                <option value="2">2 (2)</option>
+                <option value="3">3 (3)</option>
+                <option value="4">4 (4)</option>
+                <option value="5">5 (5)</option>
+                <option value="6">6 (6)</option>
+                <option value="7">7 (7)</option>
+                <option value="8">8 (8)</option>
+            </select>
+            <br>
+        </section>
+        <section>
+            <h3>ProfileCfg</h3>
+            <label id="label-ProfileCfg-ProfileId">ProfileId:</label>
+            <input id="input-ProfileCfg-ProfileId" type="number" min="0" step="1">
+            <br>
+            <label id="label-ProfileCfg-StartFreq">StartFreq:</label>
+            <input id="input-ProfileCfg-StartFreq" type="number" min="76" step="0.1" max="81">
+            <span id="span-ProfileCfg-StartFreq">GHz</span>
+
+            <!-- <input id="input-ProfileCfg-StartFreq" type="range" min="76" step="0.1" max="81">
+            <span id="span-ProfileCfg-StartFreq">asdf</span> -->
+            <br>
+            <label id="label-ProfileCfg-IdleTime">IdleTime:</label>
+            <input id="input-ProfileCfg-IdleTime" type="number" min="0" step="0.01">
+            <span id="span-ProfileCfg-IdleTime">usec</span>
+            <!-- <input id="input-ProfileCfg-IdleTime" type="range" min="0" step="0.01" max="50">
+            <span id="span-ProfileCfg-IdleTime">asdf</span> -->
+            <br>
+            <label id="label-ProfileCfg-AdcStartTime">AdcStartTime:</label>
+            <input id="input-ProfileCfg-AdcStartTime" type="number" min="0" step="0.01">
+            <span id="span-ProfileCfg-AdcStartTime">usec</span>
+            <br>
+            <label id="label-ProfileCfg-RampEndTime">RampEndTime:</label>
+            <input id="input-ProfileCfg-RampEndTime" type="number" min="0" step="0.01">
+            <span id="span-ProfileCfg-RampEndTime">usec</span>
+            <br>
+            <label id="label-ProfileCfg-TxOutPower">TxOutPower:</label>
+            <input id="input-ProfileCfg-TxOutPower" type="number">
+            <br>
+            <label id="label-ProfileCfg-TxPhaseSHifter">TxPhaseSHifter:</label>
+            <input id="input-ProfileCfg-TxPhaseSHifter" type="number">
+            <br>
+            <label id="label-ProfileCfg-FreqSlopeConst">FreqSlopeConst:</label>
+            <input id="input-ProfileCfg-FreqSlopeConst" type="number" min="0" step="0.01">
+            <span id="span-ProfileCfg-FreqSlopeConst">MHz/usec</span>
+            <br>
+            <label id="label-ProfileCfg-TxStartTime">TxStartTime:</label>
+            <input id="input-ProfileCfg-TxStartTime" type="number" min="0" step="0.01">
+            <span id="span-ProfileCfg-TxStartTime">usec</span>
+            <br>
+            <label id="label-ProfileCfg-NumAdcSamples">NumAdcSamples:</label>
+            <input id="input-ProfileCfg-NumAdcSamples" type="number" min="0" step="4">
+            <br>
+            <label id="label-ProfileCfg-DigOutSampleRate">DigOutSampleRate:</label>
+            <input id="input-ProfileCfg-DigOutSampleRate" type="number" min="0" step="1">
+            <span id="span-ProfileCfg-DigOutSampleRate">KiloSamples/sec</span>
+            <br>
+            <label id="label-ProfileCfg-HpfCornerFreq1">HpfCornerFreq1:</label>
+            <!-- <input id="input-ProfileCfg-HpfCornerFreq1" type="number"> -->
+            <select id="input-ProfileCfg-HpfCornerFreq1">
+                <option value="0">175 KHz (0)</option>
+                <option value="1">235 KHz (1)</option>
+                <option value="2">350 KHz (2)</option>
+                <option value="3">700 KHz (3)</option>
+            </select>
+            <br>
+            <label id="label-ProfileCfg-HpfCornerFreq2">HpfCornerFreq2:</label>
+            <!-- <input id="input-ProfileCfg-HpfCornerFreq2" type="number"> -->
+            <select id="input-ProfileCfg-HpfCornerFreq2">
+                <option value="0">350 KHz (0)</option>
+                <option value="1">700 KHz (1)</option>
+                <option value="2">1.4 MHz (2)</option>
+                <option value="3">2.8 MHz (3)</option>
+            </select>
+            <br>
+            <label id="label-ProfileCfg-RxGain">RxGain:</label>
+            <input id="input-ProfileCfg-RxGain" type="number">
+            <label id="label-ProfileCfg-IfGain">IfGain:</label>
+            <select id="input-ProfileCfg-IfGain">
+                <option value="24">24 dB</option>
+                <option value="26">26 dB</option>
+                <option value="28">28 dB</option>
+                <option value="30">30 dB</option>
+                <option value="32">32 dB</option>
+                <option value="34">34 dB</option>
+                <option value="36">36 dB</option>
+                <option value="38">38 dB</option>
+                <option value="40">40 dB</option>
+                <option value="42">42 dB</option>
+                <option value="44">44 dB</option>
+                <option value="46">46 dB</option>
+                <option value="48">48 dB</option>
+                <option value="50">50 dB</option>
+                <option value="52">52 dB</option>
+            </select>
+            <label id="label-ProfileCfg-RfGain">RfGain:</label>
+            <select id="input-ProfileCfg-RfGain">
+                <option value="0">30 dB (0x00)</option>
+                <option value="1">34 dB (0x01)</option>
+                <option value="3">26 dB (0x11)</option>
+            </select>
+            <br>
+        </section>
+        <section>
+            <h3>ChirpCfg</h3>
+            <label id="label-ChirpCfg-ChirpStartIndex">ChirpStartIndex:</label>
+            <input id="input-ChirpCfg-ChirpStartIndex" type="number">
+            <br>
+            <label id="label-ChirpCfg-ChirpEndIndex">ChirpEndIndex:</label>
+            <input id="input-ChirpCfg-ChirpEndIndex" type="number">
+            <br>
+            <label id="label-ChirpCfg-ProfileIdentifier">ProfileIdentifier:</label>
+            <input id="input-ChirpCfg-ProfileIdentifier" type="number">
+            <br>
+            <label id="label-ChirpCfg-StartFreqVarHz">StartFreqVarHz:</label>
+            <input id="input-ChirpCfg-StartFreqVarHz" type="number">
+            <br>
+            <label id="label-ChirpCfg-FreqSlopeVar">FreqSlopeVar:</label>
+            <input id="input-ChirpCfg-FreqSlopeVar" type="number">
+            <br>
+            <label id="label-ChirpCfg-IdleTimeVar">IdleTimeVar:</label>
+            <input id="input-ChirpCfg-IdleTimeVar" type="number">
+            <br>
+            <label id="label-ChirpCfg-AdcStartTimeVar">AdcStartTimeVar:</label>
+            <input id="input-ChirpCfg-AdcStartTimeVar" type="number">
+            <br>
+            <label id="label-ChirpCfg-TxAntennaEnableMask">TxAntennaEnableMask:</label>
+            <!-- <input id="input-ChirpCfg-TxAntennaEnableMask" type="number"> -->
+            <select id="input-ChirpCfg-TxAntennaEnableMask">
+                <option value="1">0x01 (1)</option>
+                <option value="2">0x10 (2)</option>
+                <option value="3">0x11 (3)</option>
+            </select>
+            <br>
+        </section>
+        <section>
+            <h3>BpmCfg</h3>
+            <label id="label-BpmCfg-SubFrameIdx">SubFrameIdx:</label>
+            <input id="input-BpmCfg-SubFrameIdx" type="number">
+            <br>
+            <label id="label-BpmCfg-Enabled">Enabled:</label>
+            <input id="input-BpmCfg-Enabled" type="checkbox">
+            <br>
+            <label id="label-BpmCfg-Chirp0Idx">Chirp0Idx:</label>
+            <input id="input-BpmCfg-Chirp0Idx" type="number">
+            <br>
+            <label id="label-BpmCfg-Chirp1Idx">Chirp1Idx:</label>
+            <input id="input-BpmCfg-Chirp1Idx" type="number">
+            <br>
+        </section>
+        <section>
+            <h3>FrameCfg</h3>
+            <label id="label-FrameCfg-ChirpStartIndex">ChirpStartIndex:</label>
+            <input id="input-FrameCfg-ChirpStartIndex" type="number" min="0" step="1" max="511">
+            <br>
+            <label id="label-FrameCfg-ChirpEndIndex">ChirpEndIndex:</label>
+            <input id="input-FrameCfg-ChirpEndIndex" type="number" min="0" step="1" max="511">
+            <br>
+            <label id="label-FrameCfg-NumOfLoops">NumOfLoops:</label>
+            <input id="input-FrameCfg-NumOfLoops" type="number" min="16" step="2" max="255">
+            <br>
+            <label id="label-FrameCfg-NumOfFrames">NumOfFrames:</label>
+            <input id="input-FrameCfg-NumOfFrames" type="number" min="0" step="1" max="65535">
+            <br>
+            <label id="label-FrameCfg-FramePeriodicityMs">FramePeriodicityMs:</label>
+            <input id="input-FrameCfg-FramePeriodicityMs" type="number">
+            <br>
+            <label id="label-FrameCfg-TriggerSelect">TriggerSelect:</label>
+            <!-- <input id="input-FrameCfg-TriggerSelect" type="number"> -->
+            <select id="input-FrameCfg-TriggerSelect" disabled>
+                <option value="1">Software trigger (1)</option>
+                <option value="2" disabled>Hardware trigger (2)</option>
+            </select>
+            <br>
+            <label id="label-FrameCfg-FrameTriggerDelayMs">FrameTriggerDelayMs:</label>
+            <input id="input-FrameCfg-FrameTriggerDelayMs" type="number">
+            <br>
+        </section>
+        <section>
+            <h3>LowPower</h3>
+            <label id="label-LowPower-DontCare">DontCare:</label>
+            <input id="input-LowPower-DontCare" type="number" disabled>
+            <br>
+            <label id="label-LowPower-AdcMode">AdcMode:</label>
+            <!-- <input id="input-LowPower-AdcMode" type="number"> -->
+            <select id="input-LowPower-AdcMode" disabled>
+                <option value="0" disabled>Regular ADC mode (0)</option>
+                <option value="1">Low power ADC mode (1)</option>
+            </select>
+            <br>
+        </section>
+        <section>
+            <h3>GuiMonitor</h3>
+            <label id="label-GuiMonitor-SubFrameIdx">SubFrameIdx:</label>
+            <input id="input-GuiMonitor-SubFrameIdx" type="number">
+            <br>
+            <label id="label-GuiMonitor-DetectedObject">DetectedObject:</label>
+            <input id="input-GuiMonitor-DetectedObject" type="checkbox">
+            <br>
+            <label id="label-GuiMonitor-LogMagnitudeRang">LogMagnitudeRang:</label>
+            <input id="input-GuiMonitor-LogMagnitudeRang" type="checkbox">
+            <br>
+            <label id="label-GuiMonitor-NoiseProfile">NoiseProfile:</label>
+            <input id="input-GuiMonitor-NoiseProfile" type="checkbox">
+            <br>
+            <label id="label-GuiMonitor-RangeAzimuthHeatMa">RangeAzimuthHeatMa:</label>
+            <input id="input-GuiMonitor-RangeAzimuthHeatMa" type="checkbox">
+            <br>
+            <label id="label-GuiMonitor-RangeDopplerHeatMa">RangeDopplerHeatMa:</label>
+            <input id="input-GuiMonitor-RangeDopplerHeatMa" type="checkbox">
+            <br>
+            <label id="label-GuiMonitor-StatsInfo">StatsInfo:</label>
+            <input id="input-GuiMonitor-StatsInfo" type="checkbox">
+            <br>
+        </section>
+        <section>
+            <h3>CfarCfgRange</h3>
+            <label id="label-CfarCfgRange-SubFrameIdn">SubFrameIdn:</label>
+            <input id="input-CfarCfgRange-SubFrameIdn" type="number">
+            <br>
+            <label id="label-CfarCfgRange-ProcDirection">ProcDirection:</label>
+            <!-- <input id="input-CfarCfgRange-ProcDirection" type="number"> -->
+            <select id="input-CfarCfgRange-ProcDirection" disabled>
+                <option value="0">CFAR detection in range (0)</option>
+                <option value="1" disabled>CFAR detection in doppler (1)</option>
+            </select>
+            <br>
+            <label id="label-CfarCfgRange-Mode">Mode:</label>
+            <!-- <input id="input-CfarCfgRange-Mode" type="number"> -->
+            <select id="input-CfarCfgRange-Mode" disabled>
+                <option value="0">CFAR Cell Averaging (0)</option>
+                <option value="1">CFAR Cell Averaging Greatest Of (1)</option>
+                <option value="2">CFAR Cell Averaging Smallest Of (2)</option>
+            </select>
+            <br>
+            <label id="label-CfarCfgRange-NoiseWin">NoiseWin:</label>
+            <input id="input-CfarCfgRange-NoiseWin" type="number">
+            <br>
+            <label id="label-CfarCfgRange-GuardLen">GuardLen:</label>
+            <input id="input-CfarCfgRange-GuardLen" type="number">
+            <br>
+            <label id="label-CfarCfgRange-DivShift">DivShift:</label>
+            <input id="input-CfarCfgRange-DivShift" type="number">
+            <br>
+            <label id="label-CfarCfgRange-CyclicMode">CyclicMode:</label>
+            <input id="input-CfarCfgRange-CyclicMode" type="checkbox" disabled>
+            <br>
+            <label id="label-CfarCfgRange-ThresholdScale">ThresholdScale:</label>
+            <input id="input-CfarCfgRange-ThresholdScale" type="number">
+            <input id="input-CfarCfgRange-ThresholdScale-dB" type="number">
+            <br>
+        </section>
+        <section>
+            <h3>CfarCfgDoppler</h3>
+            <label id="label-CfarCfgDoppler-SubFrameIdn">SubFrameIdn:</label>
+            <input id="input-CfarCfgDoppler-SubFrameIdn" type="number">
+            <br>
+            <label id="label-CfarCfgDoppler-ProcDirection">ProcDirection:</label>
+            <!-- <input id="input-CfarCfgDoppler-ProcDirection" type="number"> -->
+            <select id="input-CfarCfgDoppler-ProcDirection" disabled>
+                <option value="0" disabled>CFAR detection in range (0)</option>
+                <option value="1">CFAR detection in doppler (1)</option>
+            </select>
+            <br>
+            <label id="label-CfarCfgDoppler-Mode">Mode:</label>
+            <!-- <input id="input-CfarCfgDoppler-Mode" type="number"> -->
+            <select id="input-CfarCfgDoppler-Mode" disabled>
+                <option value="0">CFAR Cell Averaging (0)</option>
+                <option value="1">CFAR Cell Averaging Greatest Of (1)</option>
+                <option value="2">CFAR Cell Averaging Smallest Of (2)</option>
+            </select>
+            <br>
+            <label id="label-CfarCfgDoppler-NoiseWin">NoiseWin:</label>
+            <input id="input-CfarCfgDoppler-NoiseWin" type="number">
+            <br>
+            <label id="label-CfarCfgDoppler-GuardLen">GuardLen:</label>
+            <input id="input-CfarCfgDoppler-GuardLen" type="number">
+            <br>
+            <label id="label-CfarCfgDoppler-DivShift">DivShift:</label>
+            <input id="input-CfarCfgDoppler-DivShift" type="number">
+            <br>
+            <label id="label-CfarCfgDoppler-CyclicMode">CyclicMode:</label>
+            <input id="input-CfarCfgDoppler-CyclicMode" type="checkbox" disabled>
+            <br>
+            <label id="label-CfarCfgDoppler-ThresholdScale">ThresholdScale:</label>
+            <input id="input-CfarCfgDoppler-ThresholdScale" type="number">
+            <input id="input-CfarCfgDoppler-ThresholdScale-dB" type="number">
+            <br>
+        </section>
+        <section>
+            <h3>PeakGrouping</h3>
+            <label id="label-PeakGrouping-SubFrameIdx">SubFrameIdx:</label>
+            <input id="input-PeakGrouping-SubFrameIdx" type="number">
+            <br>
+            <label id="label-PeakGrouping-Scheme">Scheme:</label>
+            <input id="input-PeakGrouping-Scheme" type="number">
+            <br>
+            <label id="label-PeakGrouping-RangePeakGrouping">RangePeakGrouping:</label>
+            <input id="input-PeakGrouping-RangePeakGrouping" type="checkbox">
+            <br>
+            <label id="label-PeakGrouping-DopplerPeakGrouping">DopplerPeakGrouping:</label>
+            <input id="input-PeakGrouping-DopplerPeakGrouping" type="checkbox">
+            <br>
+            <label id="label-PeakGrouping-StartRangeIdx">StartRangeIdx:</label>
+            <input id="input-PeakGrouping-StartRangeIdx" type="number">
+            <br>
+            <label id="label-PeakGrouping-EndRangeIdx">EndRangeIdx:</label>
+            <input id="input-PeakGrouping-EndRangeIdx" type="number">
+            <br>
+        </section>
+        <section>
+            <h3>MultiObjBeamForming</h3>
+            <label id="label-MultiObjBeamForming-SubFrameIdx">SubFrameIdx:</label>
+            <input id="input-MultiObjBeamForming-SubFrameIdx" type="number">
+            <br>
+            <label id="label-MultiObjBeamForming-FeatureEnabled">FeatureEnabled:</label>
+            <input id="input-MultiObjBeamForming-FeatureEnabled" type="checkbox">
+            <br>
+            <label id="label-MultiObjBeamForming-Threshold">Threshold:</label>
+            <input id="input-MultiObjBeamForming-Threshold" type="number" min="0" max="1">
+            <br>
+        </section>
+        <section>
+            <h3>ClutterRemoval</h3>
+            <label id="label-ClutterRemoval-SubFrameIdx">SubFrameIdx:</label>
+            <input id="input-ClutterRemoval-SubFrameIdx" type="number">
+            <br>
+            <label id="label-ClutterRemoval-Enabled">Enabled:</label>
+            <input id="input-ClutterRemoval-Enabled" type="checkbox">
+            <br>
+        </section>
+        <section>
+            <h3>CalibDcRangeSig</h3>
+            <label id="label-CalibDcRangeSig-SubFrameIdx">SubFrameIdx:</label>
+            <input id="input-CalibDcRangeSig-SubFrameIdx" type="number">
+            <br>
+            <label id="label-CalibDcRangeSig-Enabled">Enabled:</label>
+            <input id="input-CalibDcRangeSig-Enabled" type="checkbox">
+            <br>
+            <label id="label-CalibDcRangeSig-NegativeBinIdx">NegativeBinIdx:</label>
+            <input id="input-CalibDcRangeSig-NegativeBinIdx" type="number">
+            <br>
+            <label id="label-CalibDcRangeSig-PositiveBinIdx">PositiveBinIdx:</label>
+            <input id="input-CalibDcRangeSig-PositiveBinIdx" type="number">
+            <br>
+            <label id="label-CalibDcRangeSig-NumAvg">NumAvg:</label>
+            <input id="input-CalibDcRangeSig-NumAvg" type="number">
+            <br>
+        </section>
+        <section>
+            <h3>ExtendedMaxVelocity</h3>
+            <label id="label-ExtendedMaxVelocity-SubFrameIdx">SubFrameIdx:</label>
+            <input id="input-ExtendedMaxVelocity-SubFrameIdx" type="number">
+            <br>
+            <label id="label-ExtendedMaxVelocity-Enabled">Enabled:</label>
+            <input id="input-ExtendedMaxVelocity-Enabled" type="checkbox">
+            <br>
+        </section>
+        <section>
+            <h3>CompRangeBiasAndRxChanPhase</h3>
+            <label id="label-CompRangeBiasAndRxChanPhase-RangeBias">RangeBias:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-RangeBias" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-RealTxRx00">RealTxRx00:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-RealTxRx00" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-ImaginaryTxRx00">ImaginaryTxRx00:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-ImaginaryTxRx00" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-RealTxRx01">RealTxRx01:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-RealTxRx01" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-ImaginaryTxRx01">ImaginaryTxRx01:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-ImaginaryTxRx01" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-RealTxRx02">RealTxRx02:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-RealTxRx02" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-ImaginaryTxRx02">ImaginaryTxRx02:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-ImaginaryTxRx02" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-RealTxRx03">RealTxRx03:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-RealTxRx03" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-ImaginaryTxRx03">ImaginaryTxRx03:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-ImaginaryTxRx03" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-RealTxRx10">RealTxRx10:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-RealTxRx10" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-ImaginaryTxRx10">ImaginaryTxRx10:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-ImaginaryTxRx10" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-RealTxRx11">RealTxRx11:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-RealTxRx11" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-ImaginaryTxRx11">ImaginaryTxRx11:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-ImaginaryTxRx11" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-RealTxRx12">RealTxRx12:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-RealTxRx12" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-ImaginaryTxRx12">ImaginaryTxRx12:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-ImaginaryTxRx12" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-RealTxRx13">RealTxRx13:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-RealTxRx13" type="number">
+            <br>
+            <label id="label-CompRangeBiasAndRxChanPhase-ImaginaryTxRx13">ImaginaryTxRx13:</label>
+            <input id="input-CompRangeBiasAndRxChanPhase-ImaginaryTxRx13" type="number">
+            <br>
+        </section>
+        <section>
+            <h3>MeasureRangeBiasAndRxChanPhase</h3>
+            <label id="label-MeasureRangeBiasAndRxChanPhase-Enabled">Enabled:</label>
+            <input id="input-MeasureRangeBiasAndRxChanPhase-Enabled" type="checkbox">
+            <br>
+            <label id="label-MeasureRangeBiasAndRxChanPhase-TargetDistance">TargetDistance:</label>
+            <input id="input-MeasureRangeBiasAndRxChanPhase-TargetDistance" type="number">
+            <br>
+            <label id="label-MeasureRangeBiasAndRxChanPhase-SearchWin">SearchWin:</label>
+            <input id="input-MeasureRangeBiasAndRxChanPhase-SearchWin" type="number">
+            <br>
+        </section>
+        <section>
+        </section>
+        <section>
+            <h3>Decimate</h3>
+            <label id="label-Decimate-Decimate">Decimate:</label>
+            <input id="input-Decimate-Decimate" type="number">
+            <br>
+        </section>
+    </div>
+</body>
+
+<link rel="stylesheet" type="text/css" href="radarConfigV2.css">
+<script src="radarConfigV2.js">
+</script>
+
+</html>

@@ -1,0 +1,77 @@
+{
+    "channelCfg": {
+        "rxChannelEnable": 15,
+        "txChannelEnable": 3
+    },
+    "profileCfg": {
+        "startFrequency": 76.6,
+        "idleTime": 10,
+        "adcStartTime": 3,
+        "rampEndTime": 38,
+        "frequencySlope": 3.958878,
+        "txStartTime": 1,
+        "numberOfAdcSamples": 64,
+        "sampleRate": 2000,
+        "hpfCornerFrequency1": 2,
+        "hpfCornerFrequency2": 3,
+        "rxGain": 32
+    },
+    "chirpCfg": {
+        "chirpStartIndex": 0,
+        "chirpEndIndex": 1,
+        "txAntennaEnableMask": 3
+    },
+    "bpmCfg": {
+        "enabled": 1,
+        "chirp0Index": 0,
+        "chirp1Index": 1
+    },
+    "frameCfg": {
+        "chirpStartIndex": 0,
+        "chirpEndIndex": 1,
+        "numberOfLoops": 128,
+        "numberOfFrames": 0,
+        "framePeriodicity": 50,
+        "frameTriggerDelay": 0
+    },
+    "guiMonitor": {
+        "detectedObjects": 1,
+        "rangeDopplerMap": 0,
+        "statisticsInfo": 1
+    },
+    "cfarCfgRange": {
+        "noiseWindow": 8,
+        "guardLength": 4,
+        "divideShift": 4,
+        "thresholdScale": 4096
+    },
+    "cfarCfgDoppler": {
+        "noiseWindow": 4,
+        "guardLength": 2,
+        "divideShift": 3,
+        "thresholdScale": 4096
+    },
+    "peakGrouping": {
+        "scheme": 1,
+        "rangePeakGrouping": 1,
+        "dopplerPeakGrouping": 1,
+        "startRangeIndex": 1,
+        "endRangeIndex": 63
+    },
+    "multiObjectBeamForming": {
+        "enabled": 0,
+        "threshold": 1
+    },
+    "calibrateDcRangeSignal": {
+        "enabled": 0,
+        "negativeBinIndex": -5,
+        "positiveBinIndex": 8,
+        "numberOfChirps": 256
+    },
+    "extendedMaxVelocity": {
+        "enabled": 0
+    },
+    "clutterRemoval": {
+        "enabled": 1
+    }
+}
