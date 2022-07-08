@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <div id="root">
+        <div id="header">
+            <span id='connectionStatus'>Connection Status: </span>
+            <span id='connectionStatusAfter'>Not Connected</span>
+        </div>
+        <div id="body">
+            <div id="windowsContainer">
+                <ul id="windowsList">
+                    <li>
+                        <label class="switch" data-container-id="detectionContainer">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                            <span class="status on">on</span>
+                            <span class="status off">off</span>
+                        </label>
+                        <span>Detections</span>
+                    </li>
+                    <li>
+                        <label class="switch" data-container-id="clusterContainer">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                            <span class="status on">on</span>
+                            <span class="status off">off</span>
+                        </label>
+                        <span>Clusters</span>
+                    </li>
+                    <li>
+                        <label class="switch" data-container-id="trackContainer">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                            <span class="status on">on</span>
+                            <span class="status off">off</span>
+                        </label>
+                        <span>Tracks</span>
+                    </li>
+                    <li>
+                        <label class="switch" data-container-id="radarPropertiesContainer">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                            <span class="status on">on</span>
+                            <span class="status off">off</span> 
+                        </label>
+                        <span>Properties</span>
+                    </li>
+                    <li>
+                        <label id="rdmSwitch" class="switch" data-container-id="rdmContainer">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                            <span class="status on">on</span>
+                            <span class="status off">off</span> 
+                        </label>
+                        <span>RDM</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="radarMapContainer">
+                <canvas id='radarMap'></canvas>
+            </div>
+        </div>
+
+        <div id="footer">
+            <div id="calibrateContainer" class="fixedContainer" style="display: none">
+                <div id="calibrateBody" class="contentBody">
+                    <button id="calibrateControlStartButton" class="basicButton calibrateButton">Start</button>
+                    <button id="calibrateControlPauseButton" class="basicButton calibrateButton" disabled>Pause</button>
+                    <button id="calibrateControlStopButton" class="basicButton calibrateButton" disabled>Stop</button>
+                    <div></div>
+                    <button id="calibrateControlSaveButton" class="basicButton calibrateButton" disabled>Save</button>
+                    <div id="upgradeBar">
+                        <div id="upgradeBarFill"></div>
+                        <span id="upgradeBarProgress">0%</span>
+                    </div>
+                    <button id="calibrateControlFillButton" class="basicButton calibrateButton" disabled>Fill</button>
+                    <button id="calibrateControlClearButton" class="basicButton calibrateButton" disabled>Set To
+                        Default</button>
+                    <div></div>
+                    <input id="calibrateControlMaxSnr" type="range" step="1" min="1" max="35" value="10">
+                    <!-- <div id="maxSnrValue">5</div> -->
+                </div>
+            </div>
+            <div id="detectionContainer" class="fixedContainer" style="display: none">
+                <div class="draggableHeader">
+                    <span>Detections</span>
+                </div>
+                <div class="contentBody">
+                    <div class="scrollWrapper">
+                        <label for="detectionDisplayTypeCheckbox">Single Frame</label>
+                        <input id="detectionDisplayTypeCheckbox" type="checkbox" checked />
+                        <table id="detectionTable" class="dataTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">X</th>
+                                    <th scope="col">Y</th>
+                                    <th scope="col">Velocity X</th>
+                                    <th scope="col">Velocity Y</th>
+                                    <th scope="col">Range SNR</th>
+                                    <th scope="col">Doppler SNR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="detectionCloneableTableRow" style="display: none">
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="clusterContainer" class="fixedContainer" style="display: none">
+                <div class="draggableHeader">
+                    <span>Clusters</span>
+                </div>
+                <div class="contentBody">
+                    <div class="scrollWrapper">
+                        <label for="clusterDisplayTypeCheckbox">Single Frame</label>
+                        <input id="clusterDisplayTypeCheckbox" type="checkbox" checked />
+                        <table id="clusterTable" class="dataTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Detection Ids</th>
+                                    <th scope="col">X</th>
+                                    <th scope="col">Y</th>
+                                    <th scope="col">Velocity X</th>
+                                    <th scope="col">Velocity Y</th>
+                                    <th scope="col">Width</th>
+                                    <th scope="col">Height</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="clusterCloneableTableRow" style="display: none">
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="trackContainer" class="fixedContainer" style="display: none">
+                <div class="draggableHeader">
+                    <span>Tracks</span>
+                </div>
+                <div class="contentBody">
+                    <div class="scrollWrapper">
+
+                        <label for="trackDisplayTypeCheckbox">Single Frame</label>
+                        <input id="trackDisplayTypeCheckbox" type="checkbox" checked />
+                        <table id="trackTable" class="dataTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Cluster Id</th>
+                                    <th scope="col">X</th>
+                                    <th scope="col">Y</th>
+                                    <th scope="col">Velocity X</th>
+                                    <th scope="col">Velocity Y</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Ticks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="trackCloneableTableRow" style="display: none">
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                    <td>[CLONE]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="rdmContainer" class="fixedContainer" style="display: none">
+                <div class="draggableHeader">
+                    <span>RDM</span>
+                </div>
+                <div class="contentBody">
+                    <canvas id="rdmCanvas" width="10" height="10"></canvas>
+                    <img id="rdm" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="radarPropertiesContainer" class="floatingContainer" style="display: none">
+        <div class="draggableHeader">
+            <span>Radar Properties</span>
+        </div>
+        <div class="contentBody">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Range Resolution</th>
+                        <td id="radarPropertyRangeResolution"></td>
+                    </tr>
+                    <tr>
+                        <th>Doppler Resolution</th>
+                        <td id="radarPropertyDopplerResolution"></td>
+                    </tr>
+                    <tr>
+                        <th>Range Bin Count</th>
+                        <td id="radarPropertyRangeBinCount"></td>
+                    </tr>
+                    <tr>
+                        <th>Doppler Bin Count</th>
+                        <td id="radarPropertyDopplerBinCount"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    </div>
+
+</body>
+<link rel="stylesheet" type="text/css" href="radar.css">
+
+<script src="/js/functions.js"></script>
+<script src="/js/webcode.js"></script>
+<script src="/js/radar.js"></script>
+<script src="/js/websocket.js"></script>
+
+</html>

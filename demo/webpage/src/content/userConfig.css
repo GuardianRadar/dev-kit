@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+section {
+    display: grid;
+    grid-template-columns: 15rem 10rem 1fr;
+}
+label {
+    grid-column-start: 1;
+}
+input {
+    grid-column-start: 2;
+}
+h3 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+span {
+    display: inline;
+    grid-column-start: 3;
+}
+span.reference {
+    margin-left: 1rem;
+    font-size: 10pt;
+}
+#saveButton {
+    position: sticky;
+    top: 1rem;
+    right: 1rem;
+    left: 16rem;
+}
+#trackConfigPage {
+    margin: 1rem;
+}
+#antennae > img {
+    display: block;
+}
+#antennae input {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+#antennae input:nth-child(1) {
+    margin-left: 3.20rem;
+}
+#antennae input:nth-child(2) {
+    margin-left: 0.125rem;
+}
+#antennae input:nth-child(3) {
+    margin-left: 0.125rem;
+}
+#antennae input:nth-child(4) {
+    margin-left: 0.125rem;
+}
+#antennae input:nth-child(5) {
+    margin-left: 7.325rem;
+}
+#antennae input:nth-child(6) {
+    margin-left: 5.95rem;
+}
+input[type=range] {
+    width: 20rem;
+}

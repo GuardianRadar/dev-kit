@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "removeComments": true,
+        "outDir": "src/js",
+        "target": "es2021"
+    },
+    "include": ["ts/*"]
+}
