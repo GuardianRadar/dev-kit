@@ -27,8 +27,15 @@ function getRadarConfigUserHttp() {
         xhr.onload = function () {
             switch (xhr.status) {
                 case 200:
-                    resolve(JSON.parse(xhr.response));
+                    try {
+                        resolve(JSON.parse(xhr.response));
+                    }
+                    catch (e) {
+                        reject(e);
+                    }
                     break;
+                case 404:
+                    resolve({});
                 default:
                     reject("error");
                     break;
@@ -94,6 +101,8 @@ function getTrackConfigUserHttp() {
                         reject(e);
                     }
                     break;
+                case 404:
+                    resolve({});
                 default:
                     reject("error");
                     break;

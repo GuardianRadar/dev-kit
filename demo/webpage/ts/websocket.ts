@@ -67,8 +67,8 @@ function handleMessage(message: Map<string, any>) {
     connectionStatusAfter.style.color = "lime";
     connectionStatusAfter.innerHTML = "Connected";
     frameNumber = message["FrameNumber"];
-    if (message["Img64"] != null) {
-        ($("rdm") as HTMLImageElement).src = `data:image/png;base64,${message["Img64"]}`;
+    if (message["RDM"] != null) {
+        ($("rdm") as HTMLImageElement).src = `data:image/png;base64,${message["RDM"]}`;
     }
 
     radarOutputs.detections = message["Detections"]?.map((detection) => parseDetection(detection)) ?? [];

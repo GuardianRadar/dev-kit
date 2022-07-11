@@ -43,13 +43,13 @@
         "noiseWindow": 8,
         "guardLength": 4,
         "divideShift": 4,
-        "thresholdScale": 4096
+        "thresholdScale": 3072
     },
     "cfarCfgDoppler": {
         "noiseWindow": 4,
         "guardLength": 2,
         "divideShift": 3,
-        "thresholdScale": 4096
+        "thresholdScale": 3072
     },
     "peakGrouping": {
         "scheme": 1,

@@ -20,7 +20,7 @@ function getRadarConfigDefaultHttp(): Promise<RadarConfig> {
         xhr.send();
     });
 }
-function getRadarConfigUserHttp(): Promise<RadarConfig> {
+function getRadarConfigUserHttp(): Promise<Partial<RadarConfig>> {
     return new Promise((resolve, reject) => {
         const url = `${protocol}//${hostname}:${port}/api/radarConfigUser`;
         const xhr = new XMLHttpRequest();
@@ -28,8 +28,14 @@ function getRadarConfigUserHttp(): Promise<RadarConfig> {
         xhr.onload = function () {
             switch (xhr.status) {
                 case 200:
-                    resolve(JSON.parse(xhr.response));
+                    try {
+                        resolve(JSON.parse(xhr.response));
+                    } catch (e) {
+                        reject(e);
+                    }
                     break;
+                case 404:
+                    resolve({});
                 default:
                     reject("error");
                     break;
@@ -79,7 +85,7 @@ function getTrackConfigDefaultHttp(): Promise<TrackConfig> {
         xhr.send();
     });
 }
-function getTrackConfigUserHttp(): Promise<TrackConfig> {
+function getTrackConfigUserHttp(): Promise<Partial<TrackConfig>> {
     return new Promise((resolve, reject) => {
         const url = `${protocol}//${hostname}:${port}/api/trackConfigUser`;
         const xhr = new XMLHttpRequest();
@@ -91,7 +97,10 @@ function getTrackConfigUserHttp(): Promise<TrackConfig> {
                         resolve(JSON.parse(xhr.response));
                     } catch (e) {
                         reject(e);
-                    }                    break;
+                    }
+                    break;
+                case 404:
+                    resolve({});
                 default:
                     reject("error");
                     break;

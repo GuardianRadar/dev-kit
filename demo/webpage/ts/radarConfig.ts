@@ -26,7 +26,7 @@ window.onload = async function () {
 }
 
 function updatePage(defaultConfig, userConfig) {
-    const inputNumberElements = $('radarConfigPage').querySelectorAll('input[type=number]');
+    const inputNumberElements = $('radarConfigPage').querySelectorAll('input[type=number]') as NodeListOf<HTMLInputElement>;
     inputNumberElements.forEach(element => {
         const field = element.dataset.field;
         const subField = element.dataset.subField;
@@ -35,7 +35,7 @@ function updatePage(defaultConfig, userConfig) {
         }
     });
 
-    const selectElements = $('radarConfigPage').querySelectorAll('select');
+    const selectElements = $('radarConfigPage').querySelectorAll('select') as NodeListOf<HTMLSelectElement>;
     selectElements.forEach(element => {
         const field = element.dataset.field;
         const subField = element.dataset.subField;
@@ -44,7 +44,7 @@ function updatePage(defaultConfig, userConfig) {
         }
     });
 
-    const inputCheckboxElements = $('radarConfigPage').querySelectorAll('input[type=checkbox]');
+    const inputCheckboxElements = $('radarConfigPage').querySelectorAll('input[type=checkbox]') as NodeListOf<HTMLInputElement>;
     inputCheckboxElements.forEach(element => {
         const field = element.dataset.field;
         const subField = element.dataset.subField;
@@ -55,7 +55,7 @@ function updatePage(defaultConfig, userConfig) {
 
     //extra helper inputs
     $('input-ProfileCfg-RxGain').oninput = (event) => {
-        const rxGain = event.target.value;
+        const rxGain = event.target!.value;
         const ifGain = rxGain & 0b111111;
         const rfGain = (rxGain >> 6) & 0b11;
         if ($('input-ProfileCfg-IfGain').value !== ifGain) {

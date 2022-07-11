@@ -10,7 +10,7 @@ func radarConfigUserHandler(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		bytesUser, err := ioutil.ReadFile("src/configs/radarConfigUser.json")
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			w.WriteHeader(http.StatusNotFound)
 			return
 		}
 		w.WriteHeader(http.StatusOK)
@@ -27,7 +27,7 @@ func radarConfigUserHandler(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		
+
 		updateRadarConfig <- true
 		w.WriteHeader(http.StatusOK)
 		w.Write(bytesNew)
@@ -53,7 +53,7 @@ func trackConfigUserHandler(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		bytesUser, err := ioutil.ReadFile("src/configs/trackConfigUser.json")
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			w.WriteHeader(http.StatusNotFound)
 			return
 		}
 		w.WriteHeader(http.StatusOK)

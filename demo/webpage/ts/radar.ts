@@ -583,14 +583,13 @@ function updateSwitchInput(inputElement) {
     if (inputElement.disabled) {
         inputElement.parentNode.nextElementSibling.style.color = '#999';
     } else {
-        inputElement.parentNode.nextElementSibling.style.color = inputElement.checked ? '#1e7aa5' : '#333';
+        inputElement.parentNode.nextElementSibling.style.color = inputElement.checked ? '#1e7aa5' : '#999';
         toggleVisible($(inputElement.parentNode.dataset.containerId), inputElement.checked);
     }
 }
 async function isRdmVisible() {
     try {
-        const userRadarConfigJson = await getRadarConfigUserHttp();
-        const userRadarConfig = JSON.parse(userRadarConfigJson);
+        const userRadarConfig = await getRadarConfigUserHttp();
         return userRadarConfig.guiMonitor !== undefined && userRadarConfig.guiMonitor.rangeDopplerMap === 1;
     } catch (error) {
         disable($("rdmSwitch").querySelector("input"));
@@ -601,8 +600,7 @@ async function isRdmVisible() {
 
 async function showRdm() {
     try {
-        const userRadarConfigJson = await getRadarConfigUserHttp();
-        const userRadarConfig = JSON.parse(userRadarConfigJson);
+        const userRadarConfig = await getRadarConfigUserHttp();
         userRadarConfig.frameCfg ??= {};
         userRadarConfig.frameCfg.framePeriodicity = 500;
         userRadarConfig.guiMonitor ??= {};
@@ -615,10 +613,8 @@ async function showRdm() {
 }
 async function hideRdm() {
     try {
-        const defaultRadarConfigJson = await getRadarConfigDefaultHttp();
-        const defaultRadarConfig = JSON.parse(defaultRadarConfigJson);
-        const userRadarConfigJson = await getRadarConfigUserHttp();
-        const userRadarConfig = JSON.parse(userRadarConfigJson);
+        const defaultRadarConfig = await getRadarConfigDefaultHttp();
+        const userRadarConfig = await getRadarConfigUserHttp();
         userRadarConfig.frameCfg ??= {};
         userRadarConfig.frameCfg.framePeriodicity = defaultRadarConfig.frameCfg.framePeriodicity;
         userRadarConfig.guiMonitor ??= {};

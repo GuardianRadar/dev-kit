@@ -54,8 +54,8 @@ function handleMessage(message) {
     connectionStatusAfter.style.color = "lime";
     connectionStatusAfter.innerHTML = "Connected";
     frameNumber = message["FrameNumber"];
-    if (message["Img64"] != null) {
-        $("rdm").src = `data:image/png;base64,${message["Img64"]}`;
+    if (message["RDM"] != null) {
+        $("rdm").src = `data:image/png;base64,${message["RDM"]}`;
     }
     radarOutputs.detections = message["Detections"]?.map((detection) => parseDetection(detection)) ?? [];
     radarOutputs.clusters = message["Clusters"]?.map((cluster) => parseCluster(cluster)) ?? [];

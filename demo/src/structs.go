@@ -48,6 +48,7 @@ type RuntimeCalibrationInfo struct {
 type WebsocketFrame struct {
 	FrameNumber    uint64
 	ResolutionInfo ResolutionInfo
+	RDM            string
 	Detections     []Detection
 	Clusters       []Cluster
 	Tracks         []Track
@@ -171,7 +172,7 @@ type MultiObjectBeamForming struct {
 }
 type CalibrateDcRangeSignal struct {
 	Enabled          uint16 `json:"enabled"`
-	NegativeBinIndex int16 `json:"negativeBinIndex"`
+	NegativeBinIndex int16  `json:"negativeBinIndex"`
 	PositiveBinIndex uint16 `json:"positiveBinIndex"`
 	NumberOfChirps   uint16 `json:"numberOfChirps"`
 }

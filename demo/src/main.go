@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/tls"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -18,6 +19,8 @@ import (
 const webPort int = 80
 const corePort int = 8002
 
+var coreEndpoint string = "localhost"
+
 var trackConfig TrackConfig
 var updateTrackConfig chan bool
 var updateRadarConfig chan bool
@@ -32,6 +35,11 @@ var websocketCond *sync.Cond = sync.NewCond(&websocketMutex)
 
 //Entry point for the demo
 func main() {
+
+	coreEndpointPtr := flag.String("ip", coreEndpoint, "Sets the IP for the Dev-Kit")
+	flag.Parse()
+	coreEndpoint = *coreEndpointPtr
+
 	trackConfig = getTrackConfig()
 	updateTrackConfig = make(chan bool)
 	updateRadarConfig = make(chan bool)
@@ -45,7 +53,7 @@ func main() {
 
 //Communicates with the core program
 func coreWebsocket() {
-	url := fmt.Sprintf("wss://localhost:%d/connectWebsocket", corePort)
+	url := fmt.Sprintf("wss://%s:%d/connectWebsocket", coreEndpoint, corePort)
 	for {
 		//retry until successful connection
 		var ws *websocket.Conn
@@ -68,15 +76,16 @@ func coreWebsocket() {
 		var frame CoreFrame
 		for {
 			select {
-			case <-updateRadarConfig:
-				ws.WriteJSON(getRadarConfig())
+			case yes := <-updateRadarConfig:
+				if yes {
+					ws.WriteJSON(getRadarConfig())
+				}
 			default:
 			}
 
 			err = ws.ReadJSON(&frame)
 			if err != nil {
-				fmt.Println("Error:")
-				fmt.Println(err)
+				fmt.Println("Error:", err)
 				break
 			}
 
@@ -160,8 +169,13 @@ func getTrackConfig() TrackConfig {
 
 	bytesUser, err := ioutil.ReadFile("src/configs/trackConfigUser.json")
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		trackConfig := TrackConfig{}
+		err = json.Unmarshal(bytesDefault, &trackConfig)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		return trackConfig
 	}
 	mapUser := map[string]interface{}{}
 	err = json.Unmarshal(bytesUser, &mapUser)
@@ -201,8 +215,13 @@ func getRadarConfig() RadarConfig {
 
 	bytesUser, err := ioutil.ReadFile("src/configs/radarConfigUser.json")
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		radarConfig := RadarConfig{}
+		err = json.Unmarshal(bytesDefault, &radarConfig)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		return radarConfig
 	}
 	mapUser := map[string]interface{}{}
 	err = json.Unmarshal(bytesUser, &mapUser)
