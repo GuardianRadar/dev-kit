@@ -45,7 +45,7 @@ function startWS() {
     return websocket;
 }
 
-function handleMessage(message: Map<string, any>) {
+function handleMessage(message: any) {
     if (radarProperties === undefined) {
         const resinfo = message["ResolutionInfo"];
         radarProperties = {
@@ -71,9 +71,9 @@ function handleMessage(message: Map<string, any>) {
         ($("rdm") as HTMLImageElement).src = `data:image/png;base64,${message["RDM"]}`;
     }
 
-    radarOutputs.detections = message["Detections"]?.map((detection) => parseDetection(detection)) ?? [];
-    radarOutputs.clusters = message["Clusters"]?.map((cluster) => parseCluster(cluster)) ?? [];
-    radarOutputs.tracks = message["Tracks"]?.map((track) => parseTrack(track)) ?? [];
+    radarOutputs.detections = message["Detections"]?.map((detection: any) => parseDetection(detection)) ?? [];
+    radarOutputs.clusters = message["Clusters"]?.map((cluster: any) => parseCluster(cluster)) ?? [];
+    radarOutputs.tracks = message["Tracks"]?.map((track: any) => parseTrack(track)) ?? [];
 
     console.log(`----------frame #: ${frameNumber} START-----------`);
     console.log(message);
@@ -82,7 +82,7 @@ function handleMessage(message: Map<string, any>) {
 }
 
 function parseDetection(
-    websocketDetection
+    websocketDetection: any
 ): Detection {
     return {
         id: websocketDetection["Id"],
@@ -98,7 +98,7 @@ function parseDetection(
         dopplerSNRdB: websocketDetection["DopplerSnr"],
     };
 }
-function parseCluster(websocketCluster): Cluster {
+function parseCluster(websocketCluster: any): Cluster {
     return {
         id: websocketCluster["Id"],
         detectionIds: websocketCluster["DetectionIds"],
@@ -114,7 +114,7 @@ function parseCluster(websocketCluster): Cluster {
         height: websocketCluster["Height"],
     };
 }
-function parseTrack(websocketTrack): Track {
+function parseTrack(websocketTrack: any): Track {
     return {
         id: websocketTrack["Id"],
         clusterId: websocketTrack["ClusterId"],

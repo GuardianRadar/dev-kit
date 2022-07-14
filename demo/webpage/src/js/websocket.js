@@ -1,3 +1,4 @@
+"use strict";
 const wsPort = protocol === "https:" ? 443 : 80;
 const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
 const timeoutMin = 250;

@@ -15,30 +15,30 @@
         <section>
             <h3>Clustering</h3>
             <label id="label-clustering-associateDistance">Associate Distance:</label>
-            <input id="input-clustering-associateDistance" type="number" min="0" max="100" step="0.5">
+            <input id="input-clustering-associateDistance" type="number" min="0" max="100" step="0.5" data-type="int">
             <span class="reference">The max distance (m) at which detections will be grouped and associated into a cluster</span>
             <br>
         </section>
         <section>
             <h3>Tracking</h3>
             <label id="label-tracking-associateDistance">Associate Distance:</label>
-            <input id="input-tracking-associateDistance" type="number" min="0" max="100" step="0.5">
+            <input id="input-tracking-associateDistance" type="number" min="0" max="100" step="0.5" data-type="float">
             <span class="reference">The max distance (m) at which a track will be associated with a cluster</span>
             <br>
             <label id="label-tracking-maxAge">Max Age:</label>
-            <input id="input-tracking-maxAge" type="number" min="0" max="65536" step="1">
+            <input id="input-tracking-maxAge" type="number" min="0" max="65536" step="1" data-type="int">
             <span class="reference">The total number of frames (data captures) without an associated detection at which a track will be removed</span>
             <br>
             <label id="label-tracking-maxCount">Max Count:</label>
-            <input id="input-tracking-maxCount" type="number" min="0" max="50" step="1">
+            <input id="input-tracking-maxCount" type="number" min="0" max="50" step="1" data-type="int">
             <span class="reference">The maximum number of simultaneous tracks</span>
             <br>
             <label id="label-tracking-clusterWeight">Cluster Weight:</label>
-            <input id="input-tracking-clusterWeight" type="number" min="0" max="1" step="0.01">
+            <input id="input-tracking-clusterWeight" type="number" min="0" max="1" step="0.01" data-type="float">
             <span class="reference">The amount a cluster's properties affect a track (Default is 0.5 out of 1)</span>
             <br>
             <label id="label-tracking-minimumTicks">Minimum Ticks:</label>
-            <input id="input-tracking-minimumTicks" type="number" min="0" max="65536" step="1">
+            <input id="input-tracking-minimumTicks" type="number" min="0" max="65536" step="1" data-type="int">
             <span class="reference">The minimum total number of frames (data captures) needed for a specific detection to be present and validated before generating a track</span>
             <br>
         </section>

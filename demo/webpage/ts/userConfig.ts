@@ -10,87 +10,64 @@ window.onload = async function () {
         alert(e);
     }
 
-    $("saveButton").onclick = function (e) {
-        let trackConfigNew: TrackConfig = {
-            clustering: {},
-            tracking: {}
-        }
+    $("saveButton")!.onclick = function (e) {
+        let trackConfigNew: RecursivePartial<TrackConfig> = {};
+        const clusteringConfigNew: Partial<ClusteringConfig> = {};
+        const trackingConfigNew: Partial<TrackingConfig> = {};
         let value;
-        value = coaless(($("input-clustering-associateDistance") as HTMLInputElement).value, true);
+        value = getNumberFromInput($("input-clustering-associateDistance") as HTMLInputElement);
         if (value !== undefined) {
-            trackConfigNew.clustering.associateDistance = value;
+            clusteringConfigNew.associateDistance = value;
         }
-        value = coaless(($("input-tracking-associateDistance") as HTMLInputElement).value, true);
+        value = getNumberFromInput($("input-tracking-associateDistance") as HTMLInputElement);
         if (value !== undefined) {
-            trackConfigNew.tracking.associateDistance = value;
+            trackingConfigNew.associateDistance = value;
         }
-        value = coaless(($("input-tracking-maxAge") as HTMLInputElement).value, false);
+        value = getNumberFromInput($("input-tracking-maxAge") as HTMLInputElement);
         if (value !== undefined) {
-            trackConfigNew.tracking.maxAge = value;
+            trackingConfigNew.maxAge = value;
         }
-        value = coaless(($("input-tracking-maxCount") as HTMLInputElement).value, false);
+        value = getNumberFromInput($("input-tracking-maxCount") as HTMLInputElement);
         if (value !== undefined) {
-            trackConfigNew.tracking.maxCount = value;
+            trackingConfigNew.maxCount = value;
         }
-        value = coaless(($("input-tracking-clusterWeight") as HTMLInputElement).value, true);
+        value = getNumberFromInput($("input-tracking-clusterWeight") as HTMLInputElement);
         if (value !== undefined) {
-            trackConfigNew.tracking.clusterWeight = value;
+            trackingConfigNew.clusterWeight = value;
         }
-        value = coaless(($("input-tracking-minimumTicks") as HTMLInputElement).value, false);
+        value = getNumberFromInput($("input-tracking-minimumTicks") as HTMLInputElement);
         if (value !== undefined) {
-            trackConfigNew.tracking.minimumTicks = value;
+            trackingConfigNew.minimumTicks = value;
         }
 
-        console.log(trackConfigNew);
-        if (Object.keys(trackConfigNew.clustering).length === 0) {
-            delete trackConfigNew.clustering
+        if (Object.keys(clusteringConfigNew).length === 0) {
+            trackConfigNew.clustering = clusteringConfigNew;
         }
-        if (Object.keys(trackConfigNew.tracking).length === 0) {
-            delete trackConfigNew.tracking
+        if (Object.keys(trackingConfigNew).length === 0) {
+            trackConfigNew.tracking = trackingConfigNew;
         }
 
         postTrackConfigUserHttp(trackConfigNew);
     }
 };
 
-function coaless(value, isFloat) {
-    if (value === "") {
-        return undefined;
-    }
-
-    if (isFloat) {
-        const float = parseFloat(value);
-        if (isNaN(float)) {
-            return undefined;
-        }
-        return float
-    } else {
-        const int = parseInt(value);
-        if (isNaN(int)) {
-            return undefined;
-        }
-        return int
-    }
-
+function assignPlaceholders(trackConfig: TrackConfig) {
+    ($("input-clustering-associateDistance") as HTMLInputElement).placeholder = String(trackConfig["clustering"]["associateDistance"]);
+    ($("input-tracking-associateDistance") as HTMLInputElement).placeholder = String(trackConfig["tracking"]["associateDistance"]);
+    ($("input-tracking-maxAge") as HTMLInputElement).placeholder = String(trackConfig["tracking"]["maxAge"]);
+    ($("input-tracking-maxCount") as HTMLInputElement).placeholder = String(trackConfig["tracking"]["maxCount"]);
+    ($("input-tracking-clusterWeight") as HTMLInputElement).placeholder = String(trackConfig["tracking"]["clusterWeight"]);
+    ($("input-tracking-minimumTicks") as HTMLInputElement).placeholder = String(trackConfig["tracking"]["minimumTicks"]);
 }
-
-function assignPlaceholders(trackConfig) {
-    ($("input-clustering-associateDistance") as HTMLInputElement).placeholder = trackConfig["clustering"]["associateDistance"];
-    ($("input-tracking-associateDistance") as HTMLInputElement).placeholder = trackConfig["tracking"]["associateDistance"];
-    ($("input-tracking-maxAge") as HTMLInputElement).placeholder = trackConfig["tracking"]["maxAge"];
-    ($("input-tracking-maxCount") as HTMLInputElement).placeholder = trackConfig["tracking"]["maxCount"];
-    ($("input-tracking-clusterWeight") as HTMLInputElement).placeholder = trackConfig["tracking"]["clusterWeight"];
-    ($("input-tracking-minimumTicks") as HTMLInputElement).placeholder = trackConfig["tracking"]["minimumTicks"];
-}
-function assignValues(trackConfig) {
+function assignValues(trackConfig: RecursivePartial<TrackConfig>) {
     if (trackConfig["clustering"] !== undefined) {
-        ($("input-clustering-associateDistance") as HTMLInputElement).value = trackConfig["clustering"]["associateDistance"] ?? "";
+        ($("input-clustering-associateDistance") as HTMLInputElement).value = String(trackConfig["clustering"]["associateDistance"]);
     }
     if (trackConfig["tracking"] !== undefined) {
-        ($("input-tracking-associateDistance") as HTMLInputElement).value = trackConfig["tracking"]["associateDistance"] ?? "";
-        ($("input-tracking-maxAge") as HTMLInputElement).value = trackConfig["tracking"]["maxAge"] ?? "";
-        ($("input-tracking-maxCount") as HTMLInputElement).value = trackConfig["tracking"]["maxCount"] ?? "";
-        ($("input-tracking-clusterWeight") as HTMLInputElement).value = trackConfig["tracking"]["clusterWeight"] ?? "";
-        ($("input-tracking-minimumTicks") as HTMLInputElement).value = trackConfig["tracking"]["minimumTicks"] ?? "";
+        ($("input-tracking-associateDistance") as HTMLInputElement).value = String(trackConfig["tracking"]["associateDistance"]);
+        ($("input-tracking-maxAge") as HTMLInputElement).value = String(trackConfig["tracking"]["maxAge"]);
+        ($("input-tracking-maxCount") as HTMLInputElement).value = String(trackConfig["tracking"]["maxCount"]);
+        ($("input-tracking-clusterWeight") as HTMLInputElement).value = String(trackConfig["tracking"]["clusterWeight"]);
+        ($("input-tracking-minimumTicks") as HTMLInputElement).value = String(trackConfig["tracking"]["minimumTicks"]);
     }
 }

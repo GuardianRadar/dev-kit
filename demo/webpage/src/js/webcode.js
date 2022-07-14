@@ -1,3 +1,4 @@
+"use strict";
 const protocol = location.protocol;
 const hostname = location.hostname;
 const port = location.port;
@@ -36,6 +37,7 @@ function getRadarConfigUserHttp() {
                     break;
                 case 404:
                     resolve({});
+                    break;
                 default:
                     reject("error");
                     break;
@@ -103,6 +105,7 @@ function getTrackConfigUserHttp() {
                     break;
                 case 404:
                     resolve({});
+                    break;
                 default:
                     reject("error");
                     break;

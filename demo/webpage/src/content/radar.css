@@ -12,7 +12,7 @@ html {
     /* width: 100vw; */
     height: 100vh;
     display: grid;
-    grid-template-rows: 2rem 1fr 20rem;
+    grid-template-rows: 2rem 1fr 1fr;
     grid-template-columns: 1fr;
 }
 
@@ -64,7 +64,7 @@ html {
 
 #detectionContainer {
     grid-area: 1 / 1;
-    height: 20rem;
+    /* height: 20rem; */
 }
 
 #detectionContainer .scrollWrapper {
@@ -73,7 +73,7 @@ html {
 
 #clusterContainer {
     grid-area: 1 / 2;
-    height: 20rem;
+    /* height: 20rem; */
 }
 
 #clusterContainer .scrollWrapper {
@@ -82,7 +82,7 @@ html {
 
 #trackContainer {
     grid-area: 1 / 3;
-    height: 20rem;
+    /* height: 20rem; */
 }
 
 #trackContainer .scrollWrapper {
@@ -167,7 +167,7 @@ html {
 
 .fixedContainer {
     display: block;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     margin: 0;
 }
 
@@ -264,9 +264,10 @@ tbody tr:first-child {
 
 th {
     padding-left: 0.1rem;
-
+    /* width: 7.5rem; */
     text-align: start;
     background-color: #4f515edd;
+    white-space: nowrap;
 }
 
 .switch {

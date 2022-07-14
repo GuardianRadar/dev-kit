@@ -12,22 +12,28 @@ const routes = {
         cache: true,
     }
 };
+type Routes = keyof typeof routes;
 
-let iframe;
+let iframe: HTMLIFrameElement;
 
 window.onload = async function () {
-    iframe = document.getElementById("iframe");
+    iframe = document.getElementById("iframe") as HTMLIFrameElement;
     console.log("current:", window.location.hash);
-    navigateToHash(window.location.hash);
+    navigateToGenericHash(window.location.hash);
 };
 
 window.onhashchange = async function () {
     console.log(window.location.hash);
-    navigateToHash(window.location.hash);
+    navigateToGenericHash(window.location.hash);
 };
-async function navigateToHash(hash) {
-    if (hash === "") hash = "radar";
+function navigateToGenericHash(hash: string) {
+    if (hash === "") hash = 'radar';
     if (hash[0] === "#") hash = hash.substring(1, hash.length);
+    if (Object.keys(routes).includes(hash)) {
+        navigateToHash(hash as Routes);
+    }
+}
+function navigateToHash(hash: Routes) {
     let url = routes[hash].url;
     iframe.src = url;
 }

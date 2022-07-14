@@ -20,7 +20,7 @@ function getRadarConfigDefaultHttp(): Promise<RadarConfig> {
         xhr.send();
     });
 }
-function getRadarConfigUserHttp(): Promise<Partial<RadarConfig>> {
+function getRadarConfigUserHttp(): Promise<RecursivePartial<RadarConfig>> {
     return new Promise((resolve, reject) => {
         const url = `${protocol}//${hostname}:${port}/api/radarConfigUser`;
         const xhr = new XMLHttpRequest();
@@ -36,6 +36,7 @@ function getRadarConfigUserHttp(): Promise<Partial<RadarConfig>> {
                     break;
                 case 404:
                     resolve({});
+                    break;
                 default:
                     reject("error");
                     break;
@@ -44,7 +45,7 @@ function getRadarConfigUserHttp(): Promise<Partial<RadarConfig>> {
         xhr.send();
     });
 }
-function postRadarConfigUserHttp(radarConfig): Promise<boolean> {
+function postRadarConfigUserHttp(radarConfig: RecursivePartial<RadarConfig>): Promise<boolean> {
     return new Promise((resolve, reject) => {
         const url = `${protocol}//${hostname}:${port}/api/radarConfigUser`;
         const body = JSON.stringify(radarConfig);
@@ -85,7 +86,7 @@ function getTrackConfigDefaultHttp(): Promise<TrackConfig> {
         xhr.send();
     });
 }
-function getTrackConfigUserHttp(): Promise<Partial<TrackConfig>> {
+function getTrackConfigUserHttp(): Promise<RecursivePartial<TrackConfig>> {
     return new Promise((resolve, reject) => {
         const url = `${protocol}//${hostname}:${port}/api/trackConfigUser`;
         const xhr = new XMLHttpRequest();
@@ -101,6 +102,7 @@ function getTrackConfigUserHttp(): Promise<Partial<TrackConfig>> {
                     break;
                 case 404:
                     resolve({});
+                    break;
                 default:
                     reject("error");
                     break;
@@ -109,7 +111,7 @@ function getTrackConfigUserHttp(): Promise<Partial<TrackConfig>> {
         xhr.send();
     });
 }
-function postTrackConfigUserHttp(trackConfig): Promise<boolean> {
+function postTrackConfigUserHttp(trackConfig: RecursivePartial<TrackConfig>): Promise<boolean> {
     return new Promise((resolve, reject) => {
         const url = `${protocol}//${hostname}:${port}/api/trackConfigUser`;
         const body = JSON.stringify(trackConfig);
