@@ -1,3 +1,4 @@
+"use strict";
 let radarConfigDefault;
 let radarConfigUser;
 window.onload = async function () {
@@ -45,20 +46,16 @@ function updatePage(defaultConfig, userConfig) {
         }
     });
     $('input-ProfileCfg-RxGain').oninput = (event) => {
-        const rxGain = event.target.value;
+        const rxGain = getNumberFromInput(event.target);
         const ifGain = rxGain & 0b111111;
         const rfGain = (rxGain >> 6) & 0b11;
-        if ($('input-ProfileCfg-IfGain').value !== ifGain) {
-            $('input-ProfileCfg-IfGain').value = ifGain;
-        }
-        if ($('input-ProfileCfg-RfGain').value !== rfGain) {
-            $('input-ProfileCfg-RfGain').value = rfGain;
-        }
+        $('input-ProfileCfg-IfGain').value = String(ifGain);
+        $('input-ProfileCfg-RfGain').value = String(rfGain);
     };
     $('input-ProfileCfg-IfGain').value = (userConfig?.profileCfg?.rxGain ?? defaultConfig.profileCfg.rxGain) &
         0b111111;
     $('input-ProfileCfg-IfGain').onchange = (event) => {
-        const ifGain = event.target.value;
+        const ifGain = getNumberFromInput(event.target);
         const rfGain = $('input-ProfileCfg-RfGain').value;
         const rxGain = (rfGain << 6) | (ifGain & 0b111111);
         if ($('input-ProfileCfg-RxGain').value !== rxGain) {
@@ -67,7 +64,7 @@ function updatePage(defaultConfig, userConfig) {
     };
     $('input-ProfileCfg-RfGain').value = ((userConfig?.profileCfg?.rxGain ?? defaultConfig.profileCfg.rxGain) >> 6) & 0b11;
     $('input-ProfileCfg-RfGain').onchange = (event) => {
-        const rfGain = event.target.value;
+        const rfGain = getNumberFromInput(event.target);
         const ifGain = $('input-ProfileCfg-IfGain').value;
         const rxGain = (rfGain << 6) | (ifGain & 0b111111);
         if ($('input-ProfileCfg-RxGain').value !== rxGain) {
@@ -75,7 +72,7 @@ function updatePage(defaultConfig, userConfig) {
         }
     };
     $('input-CfarCfgRange-ThresholdScale').oninput = (event) => {
-        const threshold = event.target.value;
+        const threshold = getNumberFromInput(event.target);
         const thresholdDb = threshold / 256 / 8 * 6;
         if ($('input-CfarCfgRange-ThresholdScale-dB').value != thresholdDb) {
             $('input-CfarCfgRange-ThresholdScale-dB').value = thresholdDb;
@@ -83,22 +80,22 @@ function updatePage(defaultConfig, userConfig) {
     };
     $('input-CfarCfgRange-ThresholdScale-dB').value = (userConfig?.cfarCfgRange?.thresholdScale ?? defaultConfig.cfarCfgRange.thresholdScale) / 256 / 8 * 6;
     $('input-CfarCfgRange-ThresholdScale-dB').oninput = (event) => {
-        const thresholdDb = event.target.value;
+        const thresholdDb = getNumberFromInput(event.target);
         const threshold = thresholdDb * 256 * 8 / 6;
         if ($('input-CfarCfgRange-ThresholdScale').value != threshold) {
             $('input-CfarCfgRange-ThresholdScale').value = threshold;
         }
     };
     $('input-CfarCfgDoppler-ThresholdScale').oninput = (event) => {
-        const threshold = event.target.value;
+        const threshold = getNumberFromInput(event.target);
         const thresholdDb = threshold / 256 / 8 * 6;
-        if ($('input-CfarCfgDoppler-ThresholdScale-dB').value != thresholdDb) {
+        if (getNumberFromInput($('input-CfarCfgDoppler-ThresholdScale-dB')) != thresholdDb) {
             $('input-CfarCfgDoppler-ThresholdScale-dB').value = thresholdDb;
         }
     };
     $('input-CfarCfgDoppler-ThresholdScale-dB').value = (userConfig?.cfarCfgDoppler?.thresholdScale ?? defaultConfig.cfarCfgDoppler.thresholdScale) / 256 / 8 * 6;
     $('input-CfarCfgDoppler-ThresholdScale-dB').oninput = (event) => {
-        const thresholdDb = event.target.value;
+        const thresholdDb = getNumberFromInput(event.target);
         const threshold = thresholdDb * 256 * 8 / 6;
         if ($('input-CfarCfgDoppler-ThresholdScale').value != threshold) {
             $('input-CfarCfgDoppler-ThresholdScale').value = threshold;

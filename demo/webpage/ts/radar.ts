@@ -336,12 +336,12 @@ function drawDetections(ctx) {
         clonedTableRow.removeAttribute('id');
         clonedTableRow.removeAttribute('style');
         clonedTableRow.children[0].innerHTML = `${detection.id}`;
-        clonedTableRow.children[1].innerHTML = `${detection.position.x}`;
-        clonedTableRow.children[2].innerHTML = `${detection.position.y}`;
-        clonedTableRow.children[3].innerHTML = `${detection.velocity.x}`;
-        clonedTableRow.children[4].innerHTML = `${detection.velocity.y}`;
-        clonedTableRow.children[5].innerHTML = `${detection.rangeSNRdB}`;
-        clonedTableRow.children[6].innerHTML = `${detection.dopplerSNRdB}`;
+        clonedTableRow.children[1].innerHTML = `${detection.position.x.toFixed(3)}`;
+        clonedTableRow.children[2].innerHTML = `${detection.position.y.toFixed(3)}`;
+        clonedTableRow.children[3].innerHTML = `${detection.velocity.x.toFixed(3)}`;
+        clonedTableRow.children[4].innerHTML = `${detection.velocity.y.toFixed(3)}`;
+        clonedTableRow.children[5].innerHTML = `${detection.rangeSNRdB.toFixed(3)}`;
+        clonedTableRow.children[6].innerHTML = `${detection.dopplerSNRdB.toFixed(3)}`;
         detectionTableBody.insertBefore(clonedTableRow, detectionTableBody.children[1]);
     }
 
@@ -421,12 +421,12 @@ function drawClusters(ctx) {
         clonedTableRow.removeAttribute('style');
         clonedTableRow.children[0].innerHTML = `${cluster.id}`;
         clonedTableRow.children[1].innerHTML = `${cluster.detectionIds}`;
-        clonedTableRow.children[2].innerHTML = `${cluster.position.x}`;
-        clonedTableRow.children[3].innerHTML = `${cluster.position.y}`;
-        clonedTableRow.children[4].innerHTML = `${cluster.velocity.x}`;
-        clonedTableRow.children[5].innerHTML = `${cluster.velocity.y}`;
-        clonedTableRow.children[6].innerHTML = `${cluster.width}`;
-        clonedTableRow.children[7].innerHTML = `${cluster.height}`;
+        clonedTableRow.children[2].innerHTML = `${cluster.position.x.toFixed(3)}`;
+        clonedTableRow.children[3].innerHTML = `${cluster.position.y.toFixed(3)}`;
+        clonedTableRow.children[4].innerHTML = `${cluster.velocity.x.toFixed(3)}`;
+        clonedTableRow.children[5].innerHTML = `${cluster.velocity.y.toFixed(3)}`;
+        clonedTableRow.children[6].innerHTML = `${cluster.width.toFixed(3)}`;
+        clonedTableRow.children[7].innerHTML = `${cluster.height.toFixed(3)}`;
         clusterTableBody.insertBefore(clonedTableRow, clusterTableBody.children[1]);
     }
 
@@ -514,10 +514,10 @@ function drawTracks(ctx) {
         clonedTableRow.removeAttribute('style');
         clonedTableRow.children[0].innerHTML = `${track.id}`;
         clonedTableRow.children[1].innerHTML = `${track.clusterId}`;
-        clonedTableRow.children[2].innerHTML = `${track.position.x}`;
-        clonedTableRow.children[3].innerHTML = `${track.position.y}`;
-        clonedTableRow.children[4].innerHTML = `${track.velocity.x}`;
-        clonedTableRow.children[5].innerHTML = `${track.velocity.y}`;
+        clonedTableRow.children[2].innerHTML = `${track.position.x.toFixed(3)}`;
+        clonedTableRow.children[3].innerHTML = `${track.position.y.toFixed(3)}`;
+        clonedTableRow.children[4].innerHTML = `${track.velocity.x.toFixed(3)}`;
+        clonedTableRow.children[5].innerHTML = `${track.velocity.y.toFixed(3)}`;
         clonedTableRow.children[6].innerHTML = `${track.age}`;
         clonedTableRow.children[7].innerHTML = `${track.ticks}`;
         trackTableBody.insertBefore(clonedTableRow, trackTableBody.children[1]);

@@ -1,6 +1,6 @@
 
-let radarConfigDefault;
-let radarConfigUser;
+let radarConfigDefault: RadarConfig;
+let radarConfigUser: RecursivePartial<RadarConfig>;
 
 window.onload = async function () {
     try {
@@ -12,21 +12,21 @@ window.onload = async function () {
         alert(e);
     }
 
-    $("saveConfig").onclick = () => {
+    $("saveConfig")!.onclick = () => {
         const newUserConfig = updateUserConfig(radarConfigDefault);
         console.log(newUserConfig);
         postRadarConfigUserHttp(newUserConfig);
     };
 
-    $("resetConfig").onclick = () => {
+    $("resetConfig")!.onclick = () => {
         postRadarConfigUserHttp({});
         updatePage(radarConfigDefault, radarConfigDefault);
     };
 
 }
 
-function updatePage(defaultConfig, userConfig) {
-    const inputNumberElements = $('radarConfigPage').querySelectorAll('input[type=number]') as NodeListOf<HTMLInputElement>;
+function updatePage(defaultConfig: RadarConfig, userConfig: RecursivePartial<RadarConfig>) {
+    const inputNumberElements = $('radarConfigPage')!.querySelectorAll('input[type=number]') as NodeListOf<HTMLInputElement>;
     inputNumberElements.forEach(element => {
         const field = element.dataset.field;
         const subField = element.dataset.subField;
@@ -35,7 +35,7 @@ function updatePage(defaultConfig, userConfig) {
         }
     });
 
-    const selectElements = $('radarConfigPage').querySelectorAll('select') as NodeListOf<HTMLSelectElement>;
+    const selectElements = $('radarConfigPage')!.querySelectorAll('select') as NodeListOf<HTMLSelectElement>;
     selectElements.forEach(element => {
         const field = element.dataset.field;
         const subField = element.dataset.subField;
@@ -44,7 +44,7 @@ function updatePage(defaultConfig, userConfig) {
         }
     });
 
-    const inputCheckboxElements = $('radarConfigPage').querySelectorAll('input[type=checkbox]') as NodeListOf<HTMLInputElement>;
+    const inputCheckboxElements = $('radarConfigPage')!.querySelectorAll('input[type=checkbox]') as NodeListOf<HTMLInputElement>;
     inputCheckboxElements.forEach(element => {
         const field = element.dataset.field;
         const subField = element.dataset.subField;
@@ -54,21 +54,17 @@ function updatePage(defaultConfig, userConfig) {
     });
 
     //extra helper inputs
-    $('input-ProfileCfg-RxGain').oninput = (event) => {
-        const rxGain = event.target!.value;
+    $('input-ProfileCfg-RxGain')!.oninput = (event) => {
+        const rxGain = getNumberFromInput(event.target as HTMLInputElement);
         const ifGain = rxGain & 0b111111;
         const rfGain = (rxGain >> 6) & 0b11;
-        if ($('input-ProfileCfg-IfGain').value !== ifGain) {
-            $('input-ProfileCfg-IfGain').value = ifGain;
-        }
-        if ($('input-ProfileCfg-RfGain').value !== rfGain) {
-            $('input-ProfileCfg-RfGain').value = rfGain
-        }
+        ($('input-ProfileCfg-IfGain') as HTMLInputElement).value = String(ifGain);
+        ($('input-ProfileCfg-RfGain') as HTMLInputElement).value = String(rfGain);
     }
-    $('input-ProfileCfg-IfGain').value = (userConfig?.profileCfg?.rxGain ?? defaultConfig.profileCfg.rxGain) &
+    $('input-ProfileCfg-IfGain')!.value = (userConfig?.profileCfg?.rxGain ?? defaultConfig.profileCfg.rxGain) &
         0b111111;
     $('input-ProfileCfg-IfGain').onchange = (event) => {
-        const ifGain = event.target.value;
+        const ifGain = getNumberFromInput(event.target as HTMLInputElement);
         const rfGain = $('input-ProfileCfg-RfGain').value;
         const rxGain = (rfGain << 6) | (ifGain & 0b111111);
         if ($('input-ProfileCfg-RxGain').value !== rxGain) {
@@ -77,7 +73,7 @@ function updatePage(defaultConfig, userConfig) {
     }
     $('input-ProfileCfg-RfGain').value = ((userConfig?.profileCfg?.rxGain ?? defaultConfig.profileCfg.rxGain) >> 6) & 0b11;
     $('input-ProfileCfg-RfGain').onchange = (event) => {
-        const rfGain = event.target.value;
+        const rfGain = getNumberFromInput(event.target as HTMLInputElement);
         const ifGain = $('input-ProfileCfg-IfGain').value;
         const rxGain = (rfGain << 6) | (ifGain & 0b111111);
         if ($('input-ProfileCfg-RxGain').value !== rxGain) {
@@ -86,7 +82,7 @@ function updatePage(defaultConfig, userConfig) {
     }
 
     $('input-CfarCfgRange-ThresholdScale').oninput = (event) => {
-        const threshold = event.target.value;
+        const threshold = getNumberFromInput(event.target as HTMLInputElement);
         const thresholdDb = threshold / 256 / 8 * 6;
         if ($('input-CfarCfgRange-ThresholdScale-dB').value != thresholdDb) {
             $('input-CfarCfgRange-ThresholdScale-dB').value = thresholdDb;
@@ -94,22 +90,22 @@ function updatePage(defaultConfig, userConfig) {
     }
     $('input-CfarCfgRange-ThresholdScale-dB').value = (userConfig?.cfarCfgRange?.thresholdScale ?? defaultConfig.cfarCfgRange.thresholdScale) / 256 / 8 * 6;
     $('input-CfarCfgRange-ThresholdScale-dB').oninput = (event) => {
-        const thresholdDb = event.target.value;
+        const thresholdDb = getNumberFromInput(event.target as HTMLInputElement);
         const threshold = thresholdDb * 256 * 8 / 6;
         if ($('input-CfarCfgRange-ThresholdScale').value != threshold) {
             $('input-CfarCfgRange-ThresholdScale').value = threshold;
         }
     }
     $('input-CfarCfgDoppler-ThresholdScale').oninput = (event) => {
-        const threshold = event.target.value;
+        const threshold = getNumberFromInput(event.target as HTMLInputElement);
         const thresholdDb = threshold / 256 / 8 * 6;
-        if ($('input-CfarCfgDoppler-ThresholdScale-dB').value != thresholdDb) {
+        if (getNumberFromInput($('input-CfarCfgDoppler-ThresholdScale-dB') as HTMLInputElement) != thresholdDb) {
             $('input-CfarCfgDoppler-ThresholdScale-dB').value = thresholdDb;
         }
     }
     $('input-CfarCfgDoppler-ThresholdScale-dB').value = (userConfig?.cfarCfgDoppler?.thresholdScale ?? defaultConfig.cfarCfgDoppler.thresholdScale) / 256 / 8 * 6;
     $('input-CfarCfgDoppler-ThresholdScale-dB').oninput = (event) => {
-        const thresholdDb = event.target.value;
+        const thresholdDb = getNumberFromInput(event.target as HTMLInputElement);
         const threshold = thresholdDb * 256 * 8 / 6;
         if ($('input-CfarCfgDoppler-ThresholdScale').value != threshold) {
             $('input-CfarCfgDoppler-ThresholdScale').value = threshold;
@@ -120,7 +116,7 @@ function updatePage(defaultConfig, userConfig) {
 function updateUserConfig(defaultConfig) {
     const userConfig = {};
 
-    const inputNumberElements = $('radarConfigPage').querySelectorAll('input[type=number]');
+    const inputNumberElements = $('radarConfigPage')!.querySelectorAll('input[type=number]');
     inputNumberElements.forEach(element => {
         const field = element.dataset.field;
         const subField = element.dataset.subField;
@@ -136,7 +132,7 @@ function updateUserConfig(defaultConfig) {
         }
     });
 
-    const selectElements = $('radarConfigPage').querySelectorAll('select');
+    const selectElements = $('radarConfigPage')!.querySelectorAll('select');
     selectElements.forEach(element => {
         const field = element.dataset.field;
         const subField = element.dataset.subField;
@@ -152,7 +148,7 @@ function updateUserConfig(defaultConfig) {
         }
     });
 
-    const inputCheckboxElements = $('radarConfigPage').querySelectorAll('input[type=checkbox]');
+    const inputCheckboxElements = $('radarConfigPage')!.querySelectorAll('input[type=checkbox]');
     inputCheckboxElements.forEach(element => {
         const field = element.dataset.field;
         const subField = element.dataset.subField;

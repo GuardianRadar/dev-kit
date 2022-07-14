@@ -1,3 +1,4 @@
+"use strict";
 function $(id) {
     return document.getElementById(id);
 }
@@ -10,4 +11,22 @@ function enable(element) {
 }
 function disable(element) {
     element.disabled = true;
+}
+function getNumberFromInput(htmlInput) {
+    const numberType = htmlInput.dataset.type;
+    const valueRaw = htmlInput.value;
+    let valueParsed;
+    if (numberType === "int") {
+        valueParsed = parseInt(valueRaw);
+    }
+    if (numberType === "float") {
+        valueParsed = parseFloat(valueRaw);
+    }
+    if (valueParsed === undefined) {
+        return undefined;
+    }
+    if (isNaN(valueParsed)) {
+        return undefined;
+    }
+    return valueParsed;
 }
