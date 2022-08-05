@@ -2,6 +2,7 @@
 type RecursivePartial<T> = {
     [P in keyof T]?: RecursivePartial<T[P]>;
 };
+interface IIndexable<T = any> { [key: string]: T }
 
 //helpers
 type Vector2 = {
@@ -29,7 +30,7 @@ type RadarProperties = {
 //websocket payload
 type RadarOutputs = {
     detections: Detection[];
-    clusters: Detection[];
+    clusters: Cluster[];
     tracks: Track[];
 }
 type Detection = {

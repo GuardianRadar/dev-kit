@@ -47,9 +47,9 @@ function handleMessage(message) {
             radarProperties.rangeBinCount * radarProperties.rangeResolution;
         mapProperties.m_per_px = mapProperties.maxRange / zoomScale / mapProperties.height;
         mapProperties.px_per_m = 1 / mapProperties.m_per_px;
-        $("radarPropertyRangeResolution").innerText = `${radarProperties.rangeResolution}`;
+        $("radarPropertyRangeResolution").innerText = `${radarProperties.rangeResolution.toFixed(4)}`;
         $("radarPropertyRangeBinCount").innerText = `${radarProperties.rangeBinCount}`;
-        $("radarPropertyDopplerResolution").innerText = `${radarProperties.dopplerResolution}`;
+        $("radarPropertyDopplerResolution").innerText = `${radarProperties.dopplerResolution.toFixed(4)}`;
         $("radarPropertyDopplerBinCount").innerText = `${radarProperties.dopplerBinCount}`;
     }
     connectionStatusAfter.style.color = "lime";
