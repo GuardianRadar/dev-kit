@@ -10,6 +10,10 @@ const routes = {
     radarConfig: {
         url: "content/radarConfig.html",
         cache: true,
+    },
+    about: {
+        url: "content/about.html",
+        cache: true,
     }
 };
 type Routes = keyof typeof routes;

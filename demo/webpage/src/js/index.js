@@ -11,6 +11,10 @@ const routes = {
     radarConfig: {
         url: "content/radarConfig.html",
         cache: true,
+    },
+    about: {
+        url: "content/about.html",
+        cache: true,
     }
 };
 let iframe;

@@ -92,12 +92,12 @@ func trackConfigDefaultHandler(w http.ResponseWriter, r *http.Request) {
 func versionHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
-		bytesDefault, err := ioutil.ReadFile("../version.md")
+		bytesVersion, err := ioutil.ReadFile("../version.md")
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(bytesDefault)
+		w.Write(bytesVersion)
 	}
 }

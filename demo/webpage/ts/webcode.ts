@@ -130,3 +130,22 @@ function postTrackConfigUserHttp(trackConfig: RecursivePartial<TrackConfig>): Pr
         xhr.send(body);
     });
 }
+
+function getVersionHttp(): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const url = `${protocol}//${hostname}:${port}/api/version`;
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.onload = function () {
+            switch (xhr.status) {
+                case 200:
+                    resolve(xhr.response);
+                    break;
+                default:
+                    reject("error");
+                    break;
+            }
+        };
+        xhr.send();
+    });
+}
