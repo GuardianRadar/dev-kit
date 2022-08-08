@@ -24,9 +24,15 @@ function updatePage(defaultConfig, userConfig) {
     const inputNumberElements = $('radarConfigPage').querySelectorAll('input[type=number]');
     inputNumberElements.forEach(element => {
         const field = element.dataset.field;
-        const subField = element.dataset.subField;
-        if (field !== undefined && subField !== undefined) {
-            element.value = userConfig?.[field]?.[subField] ?? defaultConfig[field][subField];
+        const subfield = element.dataset.subField;
+        if (field !== undefined && subfield !== undefined) {
+            if (field in defaultConfig) {
+                const value = defaultConfig[field];
+                if (subfield in value) {
+                    const subvalue = value[subfield];
+                    element.value = subvalue;
+                }
+            }
         }
     });
     const selectElements = $('radarConfigPage').querySelectorAll('select');
@@ -34,6 +40,12 @@ function updatePage(defaultConfig, userConfig) {
         const field = element.dataset.field;
         const subField = element.dataset.subField;
         if (field !== undefined && subField !== undefined) {
+            if (field in defaultConfig) {
+                defaultConfig[field];
+                defaultConfig[field];
+                if (subField in defaultConfig[field]) {
+                }
+            }
             element.value = userConfig?.[field]?.[subField] ?? defaultConfig[field][subField];
         }
     });

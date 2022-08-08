@@ -114,6 +114,7 @@ func runServer() {
 	router.HandleFunc("/api/radarConfigDefault", radarConfigDefaultHandler).Methods("GET")
 	router.HandleFunc("/api/trackConfigUser", trackConfigUserHandler).Methods("GET", "POST")
 	router.HandleFunc("/api/trackConfigDefault", trackConfigDefaultHandler).Methods("GET")
+	router.HandleFunc("/api/version", versionHandler).Methods("GET")
 	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./webpage/src"))))
 	err := http.ListenAndServe(fmt.Sprintf(":%d", webPort), handlers.CORS(methods, origins, headers)(router))
 	if err != nil {

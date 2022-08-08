@@ -29,9 +29,16 @@ function updatePage(defaultConfig: RadarConfig, userConfig: RecursivePartial<Rad
     const inputNumberElements = $('radarConfigPage')!.querySelectorAll('input[type=number]') as NodeListOf<HTMLInputElement>;
     inputNumberElements.forEach(element => {
         const field = element.dataset.field;
-        const subField = element.dataset.subField;
-        if (field !== undefined && subField !== undefined) {
-            element.value = userConfig?.[field]?.[subField] ?? defaultConfig[field][subField]
+        const subfield = element.dataset.subField;
+        if (field !== undefined && subfield !== undefined) {
+            if (field in defaultConfig) {
+                const value = defaultConfig[field as keyof typeof defaultConfig];
+                if (subfield in value) {
+                    const subvalue = value[subfield as keyof typeof value];
+                    element.value = subvalue;
+                }
+            // element.value = userConfig?.[field]?.[subField] ?? defaultConfig[fieldCheck][subField]
+            }
         }
     });
 
@@ -39,7 +46,15 @@ function updatePage(defaultConfig: RadarConfig, userConfig: RecursivePartial<Rad
     selectElements.forEach(element => {
         const field = element.dataset.field;
         const subField = element.dataset.subField;
+
         if (field !== undefined && subField !== undefined) {
+            if (field in defaultConfig) {
+                defaultConfig[field];
+                defaultConfig[field as keyof typeof defaultConfig]
+                if (subField in defaultConfig[field as keyof defaultConfig]) {
+
+                }
+            }
             element.value = userConfig?.[field]?.[subField] ?? defaultConfig[field][subField]
         }
     });
