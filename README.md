@@ -3,6 +3,7 @@ Public Release of Guardian Radar Dev-Kit
 ### Pull Repository
 On a Dev-Kit device, navigate to /home/pi/go/src/github.com/GuardianRadar directory and run:
 git pull https://github.com/GuardianRadar/dev-kit.git
+
 or if device is not set up yet:
 git clone https://github.com/GuardianRadar/dev-kit.git
 
