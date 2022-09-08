@@ -18,8 +18,7 @@ To build the demo from the 'demo' directory execute `go build -o main.exe ./src/
 To run the demo execute `./main.exe`
 
 ### Debugging
-Due to the complexity and real time aspect of the radar system (detection communication between everest and pi),
-most of the debugging is done with print statements and webpage console outputs. However you can use previous
-/ implement debug flags to enable multiple prints at once when debugging.
+Due to the complexity and real time aspect of the radar system (detection communication between boards),
+most debugging is easiest done with print statements and/or webpage console outputs.
 
 
