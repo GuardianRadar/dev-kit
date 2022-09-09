@@ -1,5 +1,5 @@
 # dev-kit
-Public Release of Guardian Radar Development Kit (Dev-Kit)
+Public Release of Global Radar Tech Development Kit (Dev-Kit)
 
 ### Pull Repository
 On a Dev-Kit device, navigate to /home/pi/go/src/github.com/GuardianRadar/dev-kit directory and run:
